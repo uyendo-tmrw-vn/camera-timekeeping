@@ -1,10 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import Webcam from "react-webcam";
 
+const FACING_MODE_USER = "user";
+const FACING_MODE_ENVIRONMENT = "environment";
+
+
 const videoConstraints = {
     width: 640,
     height: 500,
-    facingMode: "user"
+    facingMode: FACING_MODE_USER
 };
 
 const WebcamCapture = () => {
@@ -12,6 +16,17 @@ const WebcamCapture = () => {
     const [listCapture, setListCapture] = useState([])
     const webcamRef = React.useRef(null);
     const divRef = useRef(null);
+
+    const [facingMode, setFacingMode] = React.useState(FACING_MODE_USER);
+
+    const handleClick = React.useCallback(() => {
+        setFacingMode(
+            prevState =>
+                prevState === FACING_MODE_USER
+                    ? FACING_MODE_ENVIRONMENT
+                    : FACING_MODE_USER
+        );
+    }, []);
 
     const capture = React.useCallback(
         () => {
@@ -30,14 +45,19 @@ const WebcamCapture = () => {
 
     return (
         <div className="relative w-screen overflow-hidden">
+            <button onClick={handleClick}>Switch camera</button>
             <div className="relative">
                 <Webcam
+                    className="cursor-pointer"
+                    onClick={capture}
                     audio={false}
                     ref={webcamRef}
                     screenshotFormat="image/jpeg"
-                    videoConstraints={videoConstraints}
+                    videoConstraints={{
+                        ...videoConstraints,
+                        facingMode
+                    }}
                 />
-                <button className="bg-[transparent] absolute w-full h-full left-0 top-0 right-0 flex p-2" onClick={capture}>Capture photo</button>
             </div>
             <div ref={divRef} className="flex overflow-x-auto">
                 <div className="flex">
