@@ -17,8 +17,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main >
-        <WebcamCapture1 />
-        {/* <WebcamCapture /> */}
+        {/* <WebcamCapture1 /> */}
+        <WebcamCapture />
         {/* <WebcamDeviceId /> */}
       </main>
     </>
