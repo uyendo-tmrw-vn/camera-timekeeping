@@ -83,3 +83,7 @@ a {
     color-scheme: dark;
   }
 }
+
+video {
+  @apply w-full;
+}
