@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Webcam from "react-webcam";
 
 const videoConstraints = {
-    width: '100vw',
+    width: 640,
     height: 500,
     facingMode: "user"
 };
